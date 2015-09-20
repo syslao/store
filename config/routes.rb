@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :items
   # get 'sessions/new'
 
   # get 'sessions/create'
