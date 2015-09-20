@@ -1,4 +1,5 @@
 class ItemsController < ApplicationController
+  before_action :authorize, except: [:show, :index]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
 
   # GET /items
@@ -23,19 +24,15 @@ class ItemsController < ApplicationController
 
   # POST /items
   # POST /items.json
-  def create
-    @item = current_user.build.new(item_params)
-
-    respond_to do |format|
+  
+   def create
+    @item = current_user.items.build(item_params)
       if @item.save
-        format.html { redirect_to @item, notice: 'Item was successfully created.' }
-        format.json { render :show, status: :created, location: @item }
-      else
-        format.html { render :new }
-        format.json { render json: @item.errors, status: :unprocessable_entity }
-      end
-    end
+    redirect_to @item, notice: 'Post was successfully created.'
+  else
+    render :new
   end
+end
 
   # PATCH/PUT /items/1
   # PATCH/PUT /items/1.json
@@ -60,7 +57,15 @@ class ItemsController < ApplicationController
       format.json { head :no_content }
     end
   end
-
+  def authorize
+    if current_user.nil?
+      redirect_to login_url, alert: "Not authorized! Please log in."
+    else
+      if @item && @item.user != current_user
+        redirect_to root_path, alert: "Not authorized! Only #{@item.user} has access to this item."
+      end
+    end
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_item
