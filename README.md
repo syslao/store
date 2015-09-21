@@ -7,8 +7,11 @@ INSTALLATION
 ------------
 
 git clone
+
 bundle install
+
 rake db:migrate
+
 rails s
 
 
