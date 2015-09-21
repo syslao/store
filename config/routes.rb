@@ -5,7 +5,6 @@ Rails.application.routes.draw do
   get 'login', to: 'sessions#new', as: 'login'
   get 'logout', to: 'sessions#destroy', as: 'logout'
   resources :users
-  get 'page/index'
   root 'items#index'
 
 end

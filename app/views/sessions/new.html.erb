@@ -1,14 +1,14 @@
-<h1>Log In</h1>
 <%= form_tag sessions_path do %>
-<div class="field">
-<%= label_tag :email %><br>
-<%= text_field_tag :email %>
-</div>
-  <div class="field">
-    <%= label_tag :password %><br>
-<%= password_field_tag :password %>
-</div>
-  <div class="actions">
-    <%= submit_tag "Log In" %>
-</div>
-<% end %>
+  <div class="modal-dialog">
+		<div class="loginmodal-container">
+			<h1>Login to Your Account</h1><br>
+		  <form>
+			<%= text_field_tag :email, placeholder: "email" %>
+			<%= password_field_tag :password, placeholder: "password" %>
+			<%= submit_tag "Log In", class: "login loginmodal-submit" %>
+		  </form>
+			
+		</div>
+	</div>
+  </div>
+ <% end %>

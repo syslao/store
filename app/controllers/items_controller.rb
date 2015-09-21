@@ -28,7 +28,7 @@ class ItemsController < ApplicationController
    def create
     @item = current_user.items.build(item_params)
       if @item.save
-    redirect_to @item, notice: 'Post was successfully created.'
+    redirect_to @item, notice: 'Item was successfully created.'
   else
     render :new
   end

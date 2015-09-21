@@ -10,18 +10,18 @@
       </ul>
     </div>
   <% end %>
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
-    <%= f.label :content %><br>
-    <%= f.text_area :content %>
-  </div>
-  <div class="file">
-  <%= f.file_field :avatar %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="modal-dialog">
+    <div class="loginmodal-container">
+      <h1>New item</h1><br>
+      <form>
+      <%= f.text_field :title, placeholder: "title" %>
+      <%= f.text_field :content, placeholder: "content" %>
+      <%= f.file_field :avatar %>
+      <%= f.submit "Create", class: "login loginmodal-submit" %>
+      </form>
+      
+    </div>
   </div>
 <% end %>
+
+

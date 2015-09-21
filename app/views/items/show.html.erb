@@ -1,24 +1,15 @@
-<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>User:</strong>
-  <%= @item.user %>
-</p>
-
-<p>
-  <strong>Title:</strong>
-  <%= @item.title %>
-</p>
-
-<p>
-  <strong>Content:</strong>
-  <%= @item.content %>
-</p>
-<p>
-  <strong>Image</strong>
-  <%= image_tag @item.avatar.url(:medium) %>
-</p>
+			<div class="col-md-3 hero-feature">
+                <div class="thumbnail">
+                    <%= image_tag @item.avatar.url(:medium) %>
+                    <div class="caption">
+                        <h3><%= @item.title %></h3>
+                        <p><%= @item.content %></p>
+                        <p>
+                            <%= link_to 'Back', items_path, class: 'btn btn-warning' %>
+                        </p>
+                    </div>
+                </div>
+            </div>
 
 
-<%= link_to 'Edit', edit_item_path(@item) %> |
-<%= link_to 'Back', items_path %>

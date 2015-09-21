@@ -39,11 +39,11 @@
                         <td><%= item.content %></td>
                       <td><%= item.created_at.strftime("%d %b %Y") %></td>
                                             
-                       <td><%= link_to 'Show', item, class: 'btn mini blue-stripe' %></td>
+                       <td><%= link_to 'Show', item, class: 'btn btn-info' %></td>
                                             
-                        <td><% if current_user && item.user == current_user %><%= link_to 'Edit', edit_item_path(item), class: 'btn mini blue-stripe' %><% end %></td>
+                        <td><% if current_user && item.user == current_user %><%= link_to 'Edit', edit_item_path(item), class: 'btn btn-warning' %><% end %></td>
 
-                        <td><a class="btn mini red-stripe" <% if current_user && item.user == current_user %><%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %><% end %></a></td>
+                        <td><a <% if current_user && item.user == current_user %><%= link_to 'Destroy', item, class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %><% end %></a></td>
                     </tr>
                     <% end %>
                     
@@ -51,7 +51,7 @@
                    </tbody>
 
             </table>
-        <% if current_user %> <%= link_to 'New Item', new_item_path, class: "btn mini" %>
+        <% if current_user %> <%= link_to 'New Item', new_item_path, class: "btn btn-success" %>
         <% end %>
     </div>
 </body>

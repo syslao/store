@@ -11,27 +11,22 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :first_name %><br>
-    <%= f.text_field :first_name %>
+  
+<%= form_tag sessions_path do %>
+  <div class="modal-dialog">
+    <div class="loginmodal-container">
+      <h1>New User</h1><br>
+      <form>
+      <%= f.text_field :first_name, placeholder: "username" %>
+      <%= f.text_field :last_name, placeholder: "last name" %>
+      <%= f.text_field :email, placeholder: "email" %>
+      <%= f.password_field :password, placeholder: "password" %>
+      <%= f.password_field :password_confirmation, placeholder: "confirm password" %>
+      <%= f.submit "Register", class: "login loginmodal-submit" %>
+      </form>
+      
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :last_name %><br>
-    <%= f.text_field :last_name %>
   </div>
-  <div class="field">
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
-  </div>
-  <div class="field">
-    <%= f.label :password %><br>
-    <%= f.password_field :password %>
-  </div>
-  <div class="field">
-    <%= f.label :password_confirmation %><br>
-    <%= f.password_field :password_confirmation %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+ <% end %>
 <% end %>
