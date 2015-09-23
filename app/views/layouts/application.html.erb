@@ -37,9 +37,10 @@
 					 <% end %>
                     <li>
 					<% if current_user %>
-					<a href="#">Logged in as <%= current_user.email %></a>
+					<a href="#">Logged in as <%= current_user.email %> <%= current_user.role.name %></a>
                     <% end %>
                     </li>
+
                 </ul>
             </div>
             <!-- /.navbar-collapse -->

@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :authorize, except: [:show, :index]
+  before_action :authorize
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   load_and_authorize_resource
 
@@ -22,6 +22,7 @@ class ItemsController < ApplicationController
 
   # GET /items/1/edit
   def edit
+    @item = Item.find(params[:id])
   end
 
   # POST /items
@@ -39,14 +40,14 @@ end
   # PATCH/PUT /items/1
   # PATCH/PUT /items/1.json
   def update
-    respond_to do |format|
+    
       if @item.update(item_params)
-        format.html { redirect_to @item, notice: 'Item was successfully updated.' }
-        format.json { render :show, status: :ok, location: @item }
+        redirect_to @item, notice: 'Item was successfully updated.'
+        
       else
-        format.html { render :edit }
-        format.json { render json: @item.errors, status: :unprocessable_entity }
-      end
+        render :edit 
+        
+      
     end
   end
 

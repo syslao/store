@@ -41,7 +41,7 @@
                                             
                        <td><%= link_to 'Show', item, class: 'btn btn-info' %></td>
                                             
-                        <td><% if current_user && item.user == current_user %><%= link_to 'Edit', edit_item_path(item), class: 'btn btn-warning' %><% end %></td>
+                        <td><%= link_to 'Edit', edit_item_path(item), class: 'btn btn-warning' %></td>
 
                         <td><a <% if current_user && item.user == current_user %><%= link_to 'Destroy', item, class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %><% end %></a></td>
                     </tr>
