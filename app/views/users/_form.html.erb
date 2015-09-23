@@ -22,6 +22,7 @@
       <%= f.text_field :email, placeholder: "email" %>
       <%= f.password_field :password, placeholder: "password" %>
       <%= f.password_field :password_confirmation, placeholder: "confirm password" %>
+      <%= f.select(:role_id, [['Guest', 3], ['Owner', 2], ['Admin', 1]]) %>
       <%= f.submit "Register", class: "login loginmodal-submit" %>
       </form>
       

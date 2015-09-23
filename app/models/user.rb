@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_many :items, dependent: :destroy
+  belongs_to :role
   has_secure_password
 
   validates :first_name,
