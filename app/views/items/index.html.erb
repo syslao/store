@@ -20,6 +20,7 @@
                     <tr>
                         
                         <th class="hidden-phone">User</th>
+                        <th>In Stock</th>
                         <th>Email</th>
                         <th>Title</th>
                         <th class="hidden-phone">Content</th>
@@ -34,6 +35,11 @@
                     <tr>
                         
                         <td class="hidden-phone"><%= item.user %></td>
+                        <% if item.visible %>
+                        <td><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></td>
+                        <% else %>
+                        <td><span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span></td>
+                        <% end %>
                         <td><%= item.user.email %></td>
                         <td><%= item.title %></td>
                         <td><%= item.content %></td>

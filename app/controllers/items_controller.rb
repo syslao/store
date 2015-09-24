@@ -4,29 +4,26 @@ class ItemsController < ApplicationController
   load_and_authorize_resource
 
 
-  # GET /items
-  # GET /items.json
   def index
+    if current_user.role_id == 3
+    @items = Item.where(visible: true)
+    else
     @items = Item.all
   end
 
-  # GET /items/1
-  # GET /items/1.json
+
   def show
   end
 
-  # GET /items/new
+
   def new
     @item = Item.new
   end
 
-  # GET /items/1/edit
   def edit
-    @item = Item.find(params[:id])
   end
 
-  # POST /items
-  # POST /items.json
+
   
    def create
     @item = current_user.items.build(item_params)
@@ -35,15 +32,12 @@ class ItemsController < ApplicationController
   else
     render :new
   end
-end
+  end
 
-  # PATCH/PUT /items/1
-  # PATCH/PUT /items/1.json
   def update
     
       if @item.update(item_params)
         redirect_to @item, notice: 'Item was successfully updated.'
-        
       else
         render :edit 
         
@@ -51,13 +45,9 @@ end
     end
   end
 
-  # DELETE /items/1
-  # DELETE /items/1.json
   def destroy
     @item.destroy
-    respond_to do |format|
-      format.html { redirect_to items_url, notice: 'Item was successfully destroyed.' }
-      format.json { head :no_content }
+    redirect_to items_url, notice: 'Item was successfully destroyed.'
     end
   end
 
