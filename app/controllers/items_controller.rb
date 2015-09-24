@@ -60,6 +60,13 @@ end
       format.json { head :no_content }
     end
   end
+
+  def pro 
+    @item = Item.find(params[:id])
+    @item.update_attribute(:visible,true)
+    redirect_to @item, notice: "Item PRO"
+  end
+
   def authorize
     if current_user.nil?
       redirect_to login_url, alert: "Not authorized! Please log in."

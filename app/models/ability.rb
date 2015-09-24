@@ -5,8 +5,9 @@ class Ability
     user ||= User.new
     if user.role.name == "Owner"
         can :manage, :all
+        cannot :pro, Item
     elsif user.role.name == "Admin"
-        can [:read, :update], Item
+        can [:read, :pro ], Item
     else
         can :read, Item
     end

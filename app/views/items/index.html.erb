@@ -43,6 +43,8 @@
                                             
                         <td><%= link_to 'Edit', edit_item_path(item), class: 'btn btn-warning' %></td>
 
+                        <td><%= link_to("Make PRO", item_pro_path(item), :confirm => "Are you sure?", :method => :post)%></td>
+
                         <td><a <% if current_user && item.user == current_user %><%= link_to 'Destroy', item, class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %><% end %></a></td>
                     </tr>
                     <% end %>
