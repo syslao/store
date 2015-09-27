@@ -15,9 +15,12 @@ class UsersController < ApplicationController
   end
 
   def owner_new
-    @owner = Owner.new
+    @user = User.new
   end
 
+  def admin_new
+    @user = User.new
+  end
 
   def edit
   end
@@ -58,7 +61,7 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :role_id)
+      params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :role_id,:store_name, :birthday)
     end
 
 end

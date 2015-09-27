@@ -1,9 +1,9 @@
 class User < ActiveRecord::Base
   has_many :items, dependent: :destroy
   belongs_to :role
-  # has_secure_password
+  has_secure_password
 
-   validates :first_name,
+  validates :first_name,
              presence: true, :unless => :who?
   validates :last_name,
             presence: true, :unless => :who?
@@ -15,17 +15,16 @@ class User < ActiveRecord::Base
             }, :unless => :who?
 
 
-  scope :Admin, -> { where(type: 'Admin') }
-  scope :Owner, -> { where(race: 'Owner') }
-  scope :Guest, -> { where(race: 'Guest') }
 
-
-
+has_attached_file :user_photo, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
+validates_attachment_content_type :user_photo, content_type: /\Aimage\/.*\Z/  
+has_attached_file :user_pasport, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
+validates_attachment_content_type :user_pasport, content_type: /\Aimage\/.*\Z/  
 
 
 
   def who?
-   self.type == "Owner"
+   self.role_id = 2
   end
 
 

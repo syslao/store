@@ -1,3 +1,11 @@
-<%= render 'form' %>
+<%= params.inspect %>
 
+
+
+
+<% if params['user_type'] == 'admin'%>
+<%= render 'adminform' %>
+<% else%>
+<%= render 'form' %>
+<% end %>
 <%= link_to 'Back', users_path, class: "btn btn-warning" %>

@@ -1,4 +1,4 @@
-<%= form_for(@user) do |f| %>
+<%= form_for @user, html: { multipart: true } do |f| %>
   <% if @user.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
@@ -15,12 +15,17 @@
 <%= form_tag sessions_path do %>
   <div class="modal-dialog">
     <div class="loginmodal-container">
-      <h1>New User</h1><br>
+      <h1>New Admin</h1><br>
       <form>
+      <%= f.text_field :first_name, placeholder: "username" %>
+      <%= f.text_field :last_name, placeholder: "last name" %>
       <%= f.text_field :email, placeholder: "email" %>
+      <%= f.file_field :user_photo %> 
+      <%= f.file_field :user_pasport %>
+      <%= f.text_field :birthday, placeholder: "birthday" %>
       <%= f.password_field :password, placeholder: "password" %>
       <%= f.password_field :password_confirmation, placeholder: "confirm password" %>
-      <%= hidden_field_tag(:role_id, 3) %>
+      <%= hidden_field_tag(:role_id, 1) %>
       <%= f.submit "Register", class: "login loginmodal-submit" %>
       </form>
       

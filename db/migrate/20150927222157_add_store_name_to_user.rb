@@ -1,0 +1,5 @@
+class AddStoreNameToUser < ActiveRecord::Migration
+  def change
+    add_column :users, :store_name, :string
+  end
+end

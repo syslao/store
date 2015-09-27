@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150925102643) do
+ActiveRecord::Schema.define(version: 20150927223315) do
 
   create_table "items", force: :cascade do |t|
     t.integer  "user_id"
@@ -39,10 +39,20 @@ ActiveRecord::Schema.define(version: 20150925102643) do
     t.string   "last_name"
     t.string   "email"
     t.string   "password_digest"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-    t.integer  "role_id",         default: 3
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.integer  "role_id",                   default: 3
     t.string   "type"
+    t.string   "store_name"
+    t.integer  "birthday"
+    t.string   "user_photo_file_name"
+    t.string   "user_photo_content_type"
+    t.integer  "user_photo_file_size"
+    t.datetime "user_photo_updated_at"
+    t.string   "user_pasport_file_name"
+    t.string   "user_pasport_content_type"
+    t.integer  "user_pasport_file_size"
+    t.datetime "user_pasport_updated_at"
   end
 
   add_index "users", ["role_id"], name: "index_users_on_role_id"
