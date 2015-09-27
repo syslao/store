@@ -1,0 +1,30 @@
+<%= form_for(@owner) do |f| %>
+  <% if @owner.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@owner.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @owner.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  
+<%= form_tag sessions_path do %>
+  <div class="modal-dialog">
+    <div class="loginmodal-container">
+      <h1>New User</h1><br>
+      <form>
+      <%= f.text_field :first_name, placeholder: "username" %>
+      <%= f.text_field :last_name, placeholder: "last name" %>
+      <%= f.select(:role_id, [['Guest', 3], ['Owner', 2], ['Admin', 1]]) %>
+      <%= f.submit "Register", class: "login loginmodal-submit" %>
+      </form>
+      
+    </div>
+  </div>
+  </div>
+ <% end %>
+<% end %>
