@@ -18,10 +18,8 @@
    </div><table class="table table-striped table-hover table-users">
                 <thead>
                     <tr>
-                        
-                        <th class="hidden-phone">User</th>
                         <th>In Stock</th>
-                        <th>Email</th>
+                        <th>Store</th>
                         <th>Title</th>
                         <th class="hidden-phone">Content</th>
                         <th class="hidden-phone">Create date</th>
@@ -33,14 +31,12 @@
 
                 <% @items.each do |item| %>
                     <tr>
-                        
-                        <td class="hidden-phone"><%= item.user %></td>
                         <% if item.visible %>
                         <td><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></td>
                         <% else %>
                         <td><span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span></td>
                         <% end %>
-                        <td><%= item.user.email %></td>
+                        <td><%= item.user.store_name %></td>
                         <td><%= item.title %></td>
                         <td><%= item.content %></td>
                       <td><%= item.created_at.strftime("%d %b %Y") %></td>
@@ -49,13 +45,11 @@
                                             
                         <td><%= link_to 'Edit', edit_item_path(item), class: 'btn btn-warning' %></td>
 
+                        <td><%= link_to 'Destroy', item, class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
                         <td><%= link_to("Make PRO", item_pro_path(item), :confirm => "Are you sure?", :method => :post)%></td>
-
-                        <td><a <% if current_user && item.user == current_user %><%= link_to 'Destroy', item, class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %><% end %></a></td>
                     </tr>
                     <% end %>
-                    
-                
+
                    </tbody>
 
             </table>
@@ -63,5 +57,4 @@
         <% end %>
     </div>
 </body>
-
 </html>

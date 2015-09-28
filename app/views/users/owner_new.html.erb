@@ -22,7 +22,7 @@
       <%= f.text_field :store_name, placeholder: "Store Name" %>
       <%= f.password_field :password, placeholder: "password" %>
       <%= f.password_field :password_confirmation, placeholder: "confirm password" %>
-      <%= hidden_field_tag(:role_id, 2) %>
+      <%= f.hidden_field :role_id, value: 2 %>
       <%= f.submit "Register", class: "login loginmodal-submit" %>
       </form>
       

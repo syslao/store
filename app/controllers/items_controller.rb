@@ -1,14 +1,14 @@
 class ItemsController < ApplicationController
-  before_action :authorize
+  before_action :authorize, only: [:show, :edit, :update, :destroy]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   load_and_authorize_resource
 
 
   def index
-    if current_user.role_id == 3
-    @items = Item.where(visible: true)
+    if !current_user.respond_to?(:role_id)
+     @items = Item.where(visible: false) 
     else
-    @items = Item.all
+    @items = Item.all  
   end
 
 
@@ -32,7 +32,7 @@ class ItemsController < ApplicationController
   else
     render :new
   end
-  end
+end
 
   def update
     
