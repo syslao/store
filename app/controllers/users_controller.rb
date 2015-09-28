@@ -30,6 +30,10 @@ class UsersController < ApplicationController
       if @user.save
         session[:user_id] = @user.id
         redirect_to root_url, notice: 'User was successfully created.'
+      elsif @user.role_id == 1
+        render :admin_new
+      elsif @user.role_id == 2
+        render :owner_new
       else
         render :new 
       end 
@@ -61,7 +65,7 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :role_id,:store_name, :birthday)
+      params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :role_id,:store_name, :birthday, :user_photo, :user_pasport)
     end
 
 end

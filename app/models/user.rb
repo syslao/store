@@ -3,17 +3,37 @@ class User < ActiveRecord::Base
   belongs_to :role
   has_secure_password
 
-  validates :first_name, presence: true, if: lambda {|user| user.role_id == 1 }
-  validates :last_name, presence: true, if: lambda {|user| user.role_id == 1 }
-  validates_attachment :user_photo, if: lambda {|user| user.role_id == 1 }
-  validates_attachment :user_pasport, if: lambda {|user| user.role_id == 1 }
-  validates :birthday, presence: true, numericality: { only_integer: true }, if: lambda {|user| user.role_id == 1 }
-  validates :password, presence: true, length: { minimum: 10 }, if: lambda {|user| user.role_id == 1 }
+has_attached_file :user_photo, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
+validates_attachment_content_type :user_photo, content_type: /\Aimage\/.*\Z/  
+has_attached_file :user_pasport, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
+validates_attachment_content_type :user_pasport, content_type: /\Aimage\/.*\Z/  
 
-  validates :store_name, presence: true, if: lambda {|user| user.role_id == 2 }
-  validates :password, presence: true, length: { minimum: 8 }, if: lambda {|user| user.role_id == 2 }
 
-  validates :password, presence: true, length: { minimum: 6 }, if: lambda {|user| user.role_id == 3 }
+
+  validates :first_name, presence: true, if: :is_admin?
+  validates :last_name, presence: true, if: :is_admin?
+  validates_attachment_presence :user_photo, if: :is_admin?
+  validates_attachment_presence :user_pasport, if: :is_admin?
+  validates :birthday, presence: true, numericality: { only_integer: true }, if: :is_admin?
+  validates :password, presence: true, length: { minimum: 10 }, if: :is_admin?
+
+  validates :store_name, presence: true, if: :is_owner?
+  validates :password, presence: true, length: { minimum: 8 }, if: :is_owner?
+
+  validates :password, presence: true, length: { minimum: 6 }, if: :is_user?
+
+
+def is_admin?
+  role_id == 1
+end
+
+def is_owner?
+  role_id == 2
+end
+
+def is_user?
+  role_id == 3
+end
 
 
 
@@ -25,11 +45,6 @@ class User < ActiveRecord::Base
             }
 
 
-
-has_attached_file :user_photo, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
-validates_attachment_content_type :user_photo, content_type: /\Aimage\/.*\Z/  
-has_attached_file :user_pasport, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
-validates_attachment_content_type :user_pasport, content_type: /\Aimage\/.*\Z/  
 
 
   def to_s

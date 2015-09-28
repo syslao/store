@@ -12,7 +12,11 @@
   <% end %>
   <div class="modal-dialog">
     <div class="loginmodal-container">
-      <h1>New item</h1><br>
+      <% if params[:action] == 'new' %>
+       <h1>New item</h1><br>
+       <% elsif params[:action] == 'edit' %>
+       <h1>Edit item</h1><br>
+       <% end %>
       <form>
       <%= f.text_field :title, placeholder: "title" %>
       <%= f.text_field :content, placeholder: "content" %>
