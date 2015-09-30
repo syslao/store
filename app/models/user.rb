@@ -3,6 +3,12 @@ class User < ActiveRecord::Base
   belongs_to :role
   has_secure_password
 
+acts_as_messageable   :table_name => "messages", # default 'messages'
+
+                      :dependent  => :destroy,              # default :nullify
+                      :group_messages => true               # default false
+
+
 has_attached_file :user_photo, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
 validates_attachment_content_type :user_photo, content_type: /\Aimage\/.*\Z/  
 has_attached_file :user_pasport, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"

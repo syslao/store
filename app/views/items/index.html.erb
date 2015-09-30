@@ -47,6 +47,7 @@
 
                         <td><%= link_to 'Destroy', item, class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
                         <td><%= link_to("Make PRO", item_pro_path(item), :confirm => "Are you sure?", :method => :post)%></td>
+                        <td><%= link_to("Buy", user_buy_path(item), :method => :post)%></td>
                     </tr>
                     <% end %>
 
