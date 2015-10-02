@@ -57,6 +57,40 @@ end
     redirect_to @item, notice: "Item PRO"
   end
 
+  def buy
+    @item = Item.find(params[:id])
+    flash[:error] = current_user.can_buy?(@item)
+    return render 'items/show' if flash[:error]
+    
+    if !check_url.nil?
+    flash[:error] = check_url
+    else
+    flash[:error] = 'bad'
+    end
+    render 'items/show'
+
+  end 
+
+  def get_photo_json
+        
+        JSON.parse(source.body)
+  end
+
+  def post_admin_json
+        source = Net::HTTP.post_form(URI.parse('http://jsonplaceholder.typicode.com/todos'), {})
+        JSON.parse(source.body)
+  end
+
+  def check_url
+    source = Net::HTTP.get_response(URI.parse("http://jsonplaceholder.typicode.com/photos/#{rand(5000)}"))
+    json = JSON.parse(source.body)
+    url = json['url']
+    thumbnailUrl = json['thumbnailUrl']
+    return url if url.last(6) > thumbnailUrl.last(6)
+  end
+
+
+
   def authorize
     if current_user.nil?
       redirect_to login_url, alert: "Not authorized! Please log in."

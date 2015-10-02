@@ -10,6 +10,7 @@ class Ability
         can [:read, :pro ], Item
     else
         can :read, Item
+        can :buy, Item
     end
    end
 end

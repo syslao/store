@@ -50,7 +50,15 @@ end
               with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
             }
 
-
+def can_buy?(item)
+  if email.last(4) == ".com"
+  "с доменом взоне .com к нам нельзя"
+  elsif !item.visible
+  "товар не PRO"
+  elsif item.user.store_name.nil?
+  "товар без магазина"
+ end
+end
 
 
   def to_s

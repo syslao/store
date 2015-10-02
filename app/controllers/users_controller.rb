@@ -5,13 +5,6 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
-  def buy
-    @item = Item.find(params[:id])
-    # @item.update_attribute(:visible,true)
-    redirect_to @item, notice: "You buyed item!"
-  end
-
-
   def show
   end
 

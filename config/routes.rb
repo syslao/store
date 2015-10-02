@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :items
   match 'item/:id/pro', :to => 'items#pro', :as => 'item_pro', :via => :post
-  match 'item/:id/buy', :to => 'users#buy', :as => 'user_buy', :via => :post
+  match 'item/:id/buy', :to => 'items#buy', :as => 'user_buy', :via => :post
   resources :sessions, only: [:new, :create, :destroy]
   get 'signup', to: 'users#new', as: 'signup'
   match 'admin/signup' => 'users#admin_new', :user_type => 'admin', :via => :get, as: 'admin_signup'
