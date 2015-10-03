@@ -3,9 +3,11 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
+    @messages = current_user.received_messages
   end
 
   def show
+    @message = current_user.messages.last
   end
 
 

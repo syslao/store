@@ -43,9 +43,12 @@
 					 <% end %>
                     <li>
 					<% if current_user %>
-					<a href="#">Logged in as <%= current_user.email %> <%= current_user.role.name %></a>
-                    <% end %>
-                    </li>
+					<li><a href="#">Logged in as <%= current_user.email %> <%= current_user.role.name %></a></li>
+          <% if current_user.received_messages.present? %>
+          <li><a href="#">New message <%= current_user.received_messages.last.body %></a></li>
+          <% end %>
+          <% end %>
+                  
 
                 </ul>
             </div>

@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authorize, only: [:show, :edit, :update, :destroy]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_action :set_sender
   load_and_authorize_resource
 
 
@@ -63,9 +64,11 @@ end
     return render 'items/show' if flash[:error]
     
     if !check_url.nil?
-    flash[:error] = check_url
+        send_user_mail(check_url)
+        send_alladmin_mail( post_admin_json )
     else
-    flash[:error] = 'bad'
+        send_user_mail (1)
+        send_alladmin_mail (1)
     end
     render 'items/show'
 
@@ -90,6 +93,19 @@ end
   end
 
 
+  def send_user_mail(message)
+      @sender.send_message( current_user, message )
+  end
+
+  def send_alladmin_mail(message)
+      set_admins.each do | admin |
+      @sender.send_message( admin, message )
+      end
+  end
+  
+
+
+
 
   def authorize
     if current_user.nil?
@@ -105,6 +121,14 @@ end
     def set_item
       @item = Item.find(params[:id])
     end
+
+  def set_sender
+    @sender = User.find_by_email('system@localhost.ru')
+  end
+
+  def set_admins
+    @admins_all = User.where(role_id: 1)
+  end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def item_params
