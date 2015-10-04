@@ -28,25 +28,25 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-      if @user.save
-        session[:user_id] = @user.id
-        redirect_to root_url, notice: 'User was successfully created.'
-      elsif @user.role_id == 1
-        render :admin_new
-      elsif @user.role_id == 2
-        render :owner_new
-      else
-        render :new 
-      end 
+    if @user.save
+      session[:user_id] = @user.id
+      redirect_to root_url, notice: 'User was successfully created.'
+    elsif @user.role_id == 1
+      render :admin_new
+    elsif @user.role_id == 2
+      render :owner_new
+    else
+      render :new
+    end
   end
 
 
   def update
-      if @user.update(user_params)
-        redirect_to @user, notice: 'User was successfully updated.' 
-      else
-        render :edit 
-      end
+    if @user.update(user_params)
+      redirect_to @user, notice: 'User was successfully updated.'
+    else
+      render :edit
+    end
   end
 
 
@@ -59,14 +59,14 @@ class UsersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = User.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_user
+    @user = User.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def user_params
-      params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :role_id,:store_name, :birthday, :user_photo, :user_pasport)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def user_params
+    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :role_id,:store_name, :birthday, :user_photo, :user_pasport)
+  end
 
 end
