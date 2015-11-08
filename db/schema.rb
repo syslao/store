@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150930151645) do
+ActiveRecord::Schema.define(version: 20151006183003) do
 
   create_table "items", force: :cascade do |t|
     t.integer  "user_id"
@@ -47,6 +47,13 @@ ActiveRecord::Schema.define(version: 20150930151645) do
 
   add_index "messages", ["ancestry"], name: "index_messages_on_ancestry"
   add_index "messages", ["sent_messageable_id", "received_messageable_id"], name: "acts_as_messageable_ids"
+
+  create_table "movies", force: :cascade do |t|
+    t.string   "title"
+    t.string   "image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "roles", force: :cascade do |t|
     t.string   "name"

@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'home/index'
+
+  resources :movies
   resources :items
   match 'item/:id/pro', :to => 'items#pro', :as => 'item_pro', :via => :post
   match 'item/:id/buy', :to => 'items#buy', :as => 'user_buy', :via => :post
@@ -9,6 +12,7 @@ Rails.application.routes.draw do
   get 'login', to: 'sessions#new', as: 'login'
   get 'logout', to: 'sessions#destroy', as: 'logout'
   resources :users
+  match 'user/:id/change_role', :to => 'users#change_role', :as => 'user_change_role', :via => :post
   root 'items#index'
 
 end

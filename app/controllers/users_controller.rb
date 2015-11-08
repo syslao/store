@@ -2,8 +2,12 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def index
-    @users = User.all
-    @messages = current_user.received_messages
+    if current_user
+      @users = User.all
+      @messages = current_user.received_messages
+    else
+      redirect_to root_url, notice: 'Login as Admin'
+    end
   end
 
   def show
@@ -56,6 +60,12 @@ class UsersController < ApplicationController
       format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def change_role
+    @user = User.find(params[:id])
+    @user.update_attribute(:role_id, 1)
+    redirect_to @user, notice: "now Admin"
   end
 
   private
