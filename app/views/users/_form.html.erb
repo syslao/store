@@ -2,30 +2,27 @@
   <% if @user.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
       <ul>
-      <% @user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
-
-  
-<%= form_tag sessions_path do %>
-  <div class="modal-dialog">
-    <div class="loginmodal-container">
-      <h1>New User</h1><br>
-      <form>
-      <%= f.text_field :email, placeholder: "email" %>
-      <%= f.password_field :password, placeholder: "password" %>
-      <%= f.password_field :password_confirmation, placeholder: "confirm password" %>
-      <%= f.hidden_field :role_id, value: 3 %>
-      <%= f.submit "Register", class: "login loginmodal-submit" %>
-      </form>
-      
+  <%= form_tag sessions_path do %>
+    <div class="modal-dialog">
+      <div class="loginmodal-container">
+        <h1>New User</h1>
+        <br>
+        <form>
+          <%= f.text_field :email, placeholder: "email" %>
+          <%= f.password_field :password, placeholder: "password" %>
+          <%= f.password_field :password_confirmation, placeholder: "confirm password" %>
+          <%= f.hidden_field :role_id, value: 3 %>
+          <%= f.submit "Register", class: "login loginmodal-submit" %>
+        </form>
+      </div>
     </div>
   </div>
-  </div>
- <% end %>
+<% end %>
 <% end %>

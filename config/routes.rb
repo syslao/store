@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
   get 'home/index'
-
-  resources :movies
   resources :items
   match 'item/:id/pro', :to => 'items#pro', :as => 'item_pro', :via => :post
   match 'item/:id/buy', :to => 'items#buy', :as => 'user_buy', :via => :post

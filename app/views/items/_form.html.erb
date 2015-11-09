@@ -2,30 +2,28 @@
   <% if @item.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h2>
-
       <ul>
-      <% @item.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+        <% @item.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
   <div class="modal-dialog">
     <div class="loginmodal-container">
       <% if params[:action] == 'new' %>
-       <h1>New item</h1><br>
-       <% elsif params[:action] == 'edit' %>
-       <h1>Edit item</h1><br>
-       <% end %>
+        <h1>New item</h1>
+        <br>
+      <% elsif params[:action] == 'edit' %>
+        <h1>Edit item</h1>
+        <br>
+      <% end %>
       <form>
-      <%= f.text_field :title, placeholder: "title" %>
-      <%= f.text_field :content, placeholder: "content" %>
-      <%= f.file_field :avatar %>
-      <%= f.submit "Create", class: "login loginmodal-submit" %>
+        <%= f.text_field :title, placeholder: "title" %>
+        <%= f.text_field :content, placeholder: "content" %>
+        <%= f.file_field :avatar %>
+        <%= f.submit "Create", class: "login loginmodal-submit" %>
       </form>
-      
     </div>
   </div>
 <% end %>
-
-
