@@ -28,9 +28,9 @@
 </p>
 
 <% if current_user.is_admin? %>
-<td><%= link_to("Make Admin", user_change_role_path(@user, :role_id => '1'), :confirm => "Are you sure?", :method => :post)%></td>
-<td><%= link_to("Make Owner", user_change_role_path(@user, :role_id => '2'), :confirm => "Are you sure?", :method => :post)%></td>
-<td><%= link_to("Guest", user_change_role_path(@user, :role_id => '3'), :confirm => "Are you sure?", :method => :post)%></td>
+<td><%= link_to("Make Admin", user_change_role_path(@user, :role => '1'), :confirm => "Are you sure?", :method => :post)%></td>
+<td><%= link_to("Make Owner", user_change_role_path(@user, :role => '2'), :confirm => "Are you sure?", :method => :post)%></td>
+<td><%= link_to("Make Guest", user_change_role_path(@user, :role => '3'), :confirm => "Are you sure?", :method => :post)%></td>
 <% end %>
 
 

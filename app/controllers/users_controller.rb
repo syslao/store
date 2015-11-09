@@ -63,9 +63,19 @@ class UsersController < ApplicationController
   end
 
   def change_role
+    role_message = ""
     @user = User.find(params[:id])
-    @user.update_attribute(:role_id, 1)
-    redirect_to @user, notice: "now Admin"
+    if params['role'] == '1'
+      @user.update_attribute(:role_id, 1) 
+      role_message = 'Now Admin'
+    elsif params['role'] == '2'
+      @user.update_attribute(:role_id, 2) 
+      role_message = 'Now Owner'
+    else params['role'] == '3'
+      @user.update_attribute(:role_id, 3) 
+      role_message = 'Now Guest'
+    end
+    redirect_to @user, notice: role_message
   end
 
   private
