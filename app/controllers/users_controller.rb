@@ -14,7 +14,6 @@ class UsersController < ApplicationController
     @message = current_user.messages.last
   end
 
-
   def new
     @user = User.new
   end
@@ -44,7 +43,6 @@ class UsersController < ApplicationController
     end
   end
 
-
   def update
     if @user.update(user_params)
       redirect_to @user, notice: 'User was successfully updated.'
@@ -52,7 +50,6 @@ class UsersController < ApplicationController
       render :edit
     end
   end
-
 
   def destroy
     @user.destroy
@@ -63,7 +60,7 @@ class UsersController < ApplicationController
   end
 
   def change_role
-    role_message = ""
+    role_message = ''
     @user = User.find(params[:id])
     if params['role'] == '1'
       @user.update_attribute(:role_id, 1)
@@ -72,13 +69,14 @@ class UsersController < ApplicationController
       @user.update_attribute(:role_id, 2)
       role_message = 'Now Owner'
     else params['role'] == '3'
-      @user.update_attribute(:role_id, 3)
-      role_message = 'Now Guest'
+         @user.update_attribute(:role_id, 3)
+         role_message = 'Now Guest'
     end
     redirect_to @user, notice: role_message
   end
 
   private
+
   # Use callbacks to share common setup or constraints between actions.
   def set_user
     @user = User.find(params[:id])
@@ -86,7 +84,6 @@ class UsersController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :role_id,:store_name, :birthday, :user_photo, :user_pasport)
+    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :role_id, :store_name, :birthday, :user_photo, :user_pasport)
   end
-
 end

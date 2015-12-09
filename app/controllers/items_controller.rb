@@ -5,8 +5,6 @@ class ItemsController < ApplicationController
   before_action :set_admins
   load_and_authorize_resource
 
-
-
   def index
     if !current_user.respond_to?(:role_id)
       @items = Item.where(visible: false)
@@ -14,10 +12,8 @@ class ItemsController < ApplicationController
       @items = Item.all
     end
 
-
     def show
     end
-
 
     def new
       @item = Item.new
@@ -36,12 +32,10 @@ class ItemsController < ApplicationController
     end
 
     def update
-
       if @item.update(item_params)
         redirect_to @item, notice: 'Item was successfully updated.'
       else
         render :edit
-
 
       end
     end
@@ -54,32 +48,32 @@ class ItemsController < ApplicationController
 
   def pro
     @item = Item.find(params[:id])
-    @item.update_attribute(:visible,true)
-    redirect_to @item, notice: "Item PRO"
+    @item.update_attribute(:visible, true)
+    redirect_to @item, notice: 'Item PRO'
   end
 
   def buy
     @item = Item.find(params[:id])
-    flash[:error] = current_user.can_buy?(@item)
+    flash[:error] = current_user.can_buy(@item)
     return render 'items/show' if flash[:error]
 
-    if  check_url
-      send_user_mail( check_url )
-      send_alladmin_mail( post_admin_json )
+    if check_url
+      send_user_mail(check_url)
+      send_alladmin_mail(post_admin_json)
       # raise 'foo'
-      flash[:error] = "good purchase"
+      flash[:notice] = 'good purchase'
     elsif
-      send_user_mail ( "bad purchase" )
-      send_alladmin_mail ( "this user have problem " + current_user.email )
+      send_user_mail ( 'bad purchase')
+      send_alladmin_mail ( 'this user have problem ' + current_user.email)
       # raise 'bar'
-      flash[:error] = "bad purchase"
+      flash[:error] = 'bad purchase'
     end
     render 'items/show'
-
   end
 
-  def get_photo_json
+  private
 
+  def get_photo_json
     JSON.parse(source.body)
   end
 
@@ -96,27 +90,26 @@ class ItemsController < ApplicationController
     return url if url.last(6) > thumbnailUrl.last(6)
   end
 
-
   def send_user_mail(message)
-    @sender.send_message( current_user, {body: message, topic: "your purchase"} )
+    @sender.send_message(current_user, body: message, topic: 'your purchase')
   end
 
   def send_alladmin_mail(message)
-    set_admins.each do | admin |
-      @sender.send_message( admin, {body: message, topic: "from system"} )
+    set_admins.each do |admin|
+      @sender.send_message(admin, body: message, topic: 'from system')
     end
   end
 
   def authorize
     if current_user.nil?
-      redirect_to login_url, alert: "Not authorized! Please log in."
+      redirect_to login_url, alert: 'Not authorized! Please log in.'
     else
       if @item && @item.user != current_user
         redirect_to root_path, alert: "Not authorized! Only #{@item.user} has access to this item."
       end
     end
   end
-  private
+
   # Use callbacks to share common setup or constraints between actions.
   def set_item
     @item = Item.find(params[:id])
