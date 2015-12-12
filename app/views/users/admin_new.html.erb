@@ -11,24 +11,24 @@
     </div>
   <% end %>
 
-  
+
 <%= form_tag sessions_path do %>
   <div class="modal-dialog">
     <div class="loginmodal-container">
       <h1>New Admin</h1><br>
       <form>
-      <%= f.hidden_field :role_id, value: 1 %>
       <%= f.text_field :first_name, placeholder: "username" %>
       <%= f.text_field :last_name, placeholder: "last name" %>
       <%= f.text_field :email, placeholder: "email" %>
-      <%= f.file_field :user_photo %> 
+      <%= f.file_field :user_photo %>
       <%= f.file_field :user_pasport %>
       <%= f.text_field :birthday, placeholder: "birthday" %>
       <%= f.password_field :password, placeholder: "password" %>
       <%= f.password_field :password_confirmation, placeholder: "confirm password" %>
+      <%= f.hidden_field :role, value: "admin" %>
       <%= f.submit "Register", class: "login loginmodal-submit" %>
       </form>
-      
+
     </div>
   </div>
   </div>

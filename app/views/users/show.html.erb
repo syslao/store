@@ -12,7 +12,7 @@
 </p>
 <p>
   <strong>Role:</strong>
-  <%= @user.role.name %>
+  <%= @user.role %>
 </p>
 <p>
   <strong>Messge:</strong>
@@ -20,10 +20,10 @@
     <%= @message.body %>
   <% end %>
 </p>
-<% if current_user.is_admin? %>
-  <td><%= link_to("Make Admin", user_change_role_path(@user, :role => '1'), :confirm => "Are you sure?", :method => :post)%></td>
-  <td><%= link_to("Make Owner", user_change_role_path(@user, :role => '2'), :confirm => "Are you sure?", :method => :post)%></td>
-  <td><%= link_to("Make Guest", user_change_role_path(@user, :role => '3'), :confirm => "Are you sure?", :method => :post)%></td>
+<% if current_user.is_admin %>
+  <td><%= link_to("Make Admin", user_change_role_path(@user, :role => 'admin'), :confirm => "Are you sure?", :method => :post)%></td>
+  <td><%= link_to("Make Owner", user_change_role_path(@user, :role => 'owner'), :confirm => "Are you sure?", :method => :post)%></td>
+  <td><%= link_to("Make Guest", user_change_role_path(@user, :role => 'guest'), :confirm => "Are you sure?", :method => :post)%></td>
 <% end %>
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

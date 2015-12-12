@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   has_many :items, dependent: :destroy
-  belongs_to :role
+  enum role: [:admin, :owner, :guest]
   has_secure_password
 
   acts_as_messageable table_name: 'messages',
@@ -26,15 +26,15 @@ class User < ActiveRecord::Base
   validates :password, presence: true, length: { minimum: 6 }, if: :is_user
 
   def is_admin
-    role_id == 1
+    role == 'admin'
   end
 
   def is_owner
-    role_id == 2
+    role == 'owner'
   end
 
   def is_user
-    role_id == 3
+    role == 'guest'
   end
 
   validates :email,
@@ -48,10 +48,9 @@ class User < ActiveRecord::Base
     if email.last(4) == '.com'
       'domain in .com zone forbiden'
     elsif !item.visible
-      'iten is not PRO'
+      'item is not PRO'
     elsif item.user.store_name.nil?
       'item without store'
     end
   end
-
 end
