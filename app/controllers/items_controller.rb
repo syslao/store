@@ -4,7 +4,7 @@ class ItemsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    if !current_user.respond_to?(:role)
+    if !current_user
       @items = Item.where(visible: false)
     else
       @items = Item.all
@@ -50,7 +50,7 @@ class ItemsController < ApplicationController
       flash[:alert] = @buy.error
       render 'show'
     else
-      flash[:notice] = @buy.error
+      flash[:notice] = 'good purchase'
       render 'show'
     end
   end

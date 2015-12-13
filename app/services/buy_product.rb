@@ -18,10 +18,9 @@ class BuyProduct
     if check_url
       send_user_mail(check_url)
       send_alladmin_mail(post_admin_json)
-      self.error = 'good purchase'
     else
       send_user_mail 'bad purchase'
-      send_alladmin_mail 'this user have problem #{user.email}'
+      send_alladmin_mail "this user have problem #{user.email}"
       self.error = 'bad purchase'
     end
   end
@@ -36,7 +35,7 @@ class BuyProduct
     json = JSON.parse(source.body)
     url = json['url']
     thumbnail_url = json['thumbnailUrl']
-    return url if url.last(6) > thumbnail_url.last(6)
+    url if url.last(6) > thumbnail_url.last(6)
   end
 
   def send_user_mail(message)

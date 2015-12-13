@@ -11,10 +11,10 @@ class ApplicationController < ActionController::Base
   private
 
   def current_user
-    User.where(id: session[:user_id]).first
+    User.find_by(id: session[:user_id])
   end
 
   def authorize
-    redirect_to login_url, alert: 'Not authorized! Please log in.' if current_user.nil?
+    redirect_to login_url, alert: 'Not authorized! Please log in.' unless current_user
   end
 end
